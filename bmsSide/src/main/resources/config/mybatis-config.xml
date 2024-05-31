@@ -23,7 +23,7 @@
             </dataSource>
         </environment>
     </environments>
-<!--    <mappers>-->
-<!--        <mapper resource="com/ohgiraffers/practice/model/dao.test.xml"/>-->
-<!--    </mappers>-->
+    <mappers>
+        <mapper resource="sql/InventoryMapper.xml"/>
+    </mappers>
 </configuration>
