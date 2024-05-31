@@ -1,6 +1,8 @@
 package com.side.bms.view;
 
 import com.side.bms.model.dto.BookDTO;
+import com.side.bms.model.dto.QuantityByBookDTO;
+import com.side.bms.model.dto.QuantityByLocationDTO;
 
 import java.util.List;
 
@@ -13,11 +15,27 @@ public class ResultView {
         }
     }
 
+    public void printBookQuantity(List<QuantityByBookDTO> bookQuantityList) {
+        System.out.println("==================도서별 재고조회=================");
+        for(QuantityByBookDTO quantity : bookQuantityList) {
+            System.out.println(quantity);
+        }
+        System.out.println("==============================================");
+    }
+    public void printLocationQuantity(List<QuantityByLocationDTO> quantityByLocationDTO) {
+        System.out.println("==================창고별 재고조회=================");
+        for(QuantityByLocationDTO quantity : quantityByLocationDTO) {
+            System.out.println(quantity);
+        }
+        System.out.println("==============================================");
+    }
+
     public void printSuccessMessage(String successCode) {
 
         String successMessage = "";
         switch(successCode) {
-            case "select" : successMessage = "도서 조회에 성공하였습니다."; break;
+            case "selectBook" : successMessage = "도서별 재고 조회에 성공하였습니다."; break;
+            case "selectInventory" : successMessage = "창고별 재고 조회에 성공하였습니다."; break;
             case "insert" : successMessage = "신규 도서 등록을 성공하였습니다."; break;
             case "update" : successMessage = "도서 수정을 성공하였습니다."; break;
             case "delete" : successMessage = "도서 삭제를 성공하였습니다."; break;
@@ -32,8 +50,11 @@ public class ResultView {
         String errorMessage = "";
 
         switch(errorCode) {
-            case "selectList" :
-                errorMessage = "도서 목록 조회를 실패하였습니다.";
+            case "selectBookList" :
+                errorMessage = "도서별 재고 목록 조회를 실패하였습니다.";
+                break;
+            case "selectInventoryList" :
+                errorMessage = "창고별 재고 목록 조회를 실패하였습니다.";
                 break;
             case "insert" :
                 errorMessage = "도서 등록을 실패하였습니다.";

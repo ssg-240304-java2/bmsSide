@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.side.bms.model.dao.InventoryMapper">
+
+    <select id="selectBookQuantity" resultType="QuantityByBookDTO">
+        select
+        I.inventory_id,
+        B.title,
+        I.quantity
+        from
+        tbl_book B JOIN tbl_inventory I
+        ON B.book_id = I.book_id
+    </select>
+
+    <select id="selectLocationQuantity" resultType="QuantityByLocationDTO">
+        select
+        B.book_id,
+        B.title,
+        I.quantity
+        from
+        tbl_book B JOIN tbl_inventory I
+        ON B.book_id = I.book_id
+        where
+        I.location = #{location}
+    </select>
+
+
+</mapper>
