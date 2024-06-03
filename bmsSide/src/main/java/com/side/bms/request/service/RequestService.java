@@ -7,8 +7,11 @@ import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
+import static com.side.bms.common.MyBatisTemplate.getSqlSession;
+
 public class RequestService {
-    public static List<RequestBookDTO> selectRequestBook() {            // 주문도서선택
+
+    public List<RequestBookDTO> selectRequestBook() {            // 주문도서선택
 
 //        SqlSession sqlSession = getSqlSession();
 //        RequestMapper = sqlSession.getMapper(RequestMapper.class);
@@ -17,20 +20,16 @@ public class RequestService {
 //        return requestBook;
 
 
-        SqlSession sqlSession = getSqlSession();        // try catch 사용
+        SqlSession sqlSession = getSqlSession();
         try {
             RequestMapper requestMapper = sqlSession.getMapper(RequestMapper.class);
-            List<RequestBookDTO> requestBook = RequestMapper.selectRequestBook();
+            List<RequestBookDTO> requestBook = requestMapper.selectRequestBook();
             return requestBook;
         } finally {
-            sqlSession.close();
+//            sqlSession.close();
         }
     }
 
-    private static SqlSession getSqlSession() {
-
-        return null;
-    }
 
     public List<RequestDTO> selectRequest() {
 

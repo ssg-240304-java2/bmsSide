@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.side.bms.request.mapper.RequestMapper">
+
+    <resultMap id="requestBookMap" type="com.side.bms.request.model.RequestBookDTO">
+
+        <result property="BookId" column="book_id"/>
+        <result property="Title" column="title"/>
+        <result property="Author" column="author"/>
+        <result property="Description" column="description"/>
+        <result property="Price" column="price"/>
+        <result property="Category" column="category"/>
+        <result property="CreatedAt" column="created_at"/>
+
+    </resultMap>
+<select id="selectRequestBook" resultMap="requestBookMap">
+    SELECT
+            book_id
+    ,       title
+    ,       author
+    ,       description
+    ,       price
+    ,       category
+    ,       created_at
+    FROM tbl_book
+</select>
+
+</mapper>

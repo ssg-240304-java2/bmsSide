@@ -1,6 +1,7 @@
 package com.side.bms.request.controller;
 
 import com.side.bms.request.model.RequestBookDTO;
+import com.side.bms.request.model.RequestDTO;
 
 import java.util.List;
 
@@ -11,10 +12,11 @@ public class PrintResult {
 
     public void printRequsetList(List<RequestBookDTO> requestBook) {
         System.out.println("======== 도서 목록 =======");
-        for (RequestBookDTO requestBookDTO : requestBookList) { // requestDTO 와 밑에 requestBook 이름이 달라도 될지 의문
-            System.out.println(requestBook);
+        for (RequestBookDTO requestBookDTO : requestBook) { // requestDTO 와 밑에 requestBook 이름이 달라도 될지 의문
+            System.out.println(requestBookDTO);
         }
         // 도서 테이블 출력
+
 
     }
 
@@ -30,5 +32,12 @@ public class PrintResult {
                 break;
             }
         }
+
+    public void printRequsetList2(List<RequestDTO> request) {
+        System.out.println("====== 주문내역확인 ======");
+        for (RequestDTO requestDTO : request) {
+            System.out.println(requestDTO);
+        }
     }
+}
 

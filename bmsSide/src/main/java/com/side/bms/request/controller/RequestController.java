@@ -18,13 +18,12 @@ public class RequestController {
     }
 
     public void selectRequestBook() {           // 주문 도서 선택
-
-        List<RequestBookDTO> requestBook = RequestService.selectRequestBook();
+        List<RequestBookDTO> requestBook = requestService.selectRequestBook();
 
         if (requestBook != null) {
             printResult.printRequsetList(requestBook);
         } else {
-            printResult.printErrorMessage("selectRequset");
+            printResult.printErrorMessage("selectRequest");
         }
 
 
@@ -35,7 +34,7 @@ public class RequestController {
         List<RequestDTO> request = requestService.selectRequest();
 
         if (request != null) {
-            printResult.printRequsetList(request);
+            printResult.printRequsetList2(request);
         } else {
             printResult.printErrorMessage("request");           //printResult 주문내역출력 서비스부터
         }
