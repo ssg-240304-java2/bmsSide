@@ -26,5 +26,25 @@
     ,       created_at
     FROM tbl_book
 </select>
+    <resultMap id="requestMap" type="com.side.bms.request.model.RequestDTO">
+
+        <result property="OrderId" column="order_id"/>
+        <result property="UserId" column="user_id"/>
+        <result property="OrderDate" column="order_date"/>
+        <result property="Status" column="status"/>
+
+    </resultMap>
+
+<select id="selectRequest" resultMap="requestMap">
+    SELECT
+            order_id
+    ,       user_id
+    ,       order_date
+    ,       status
+
+    FROM tbl_order
+
+
+</select>
 
 </mapper>

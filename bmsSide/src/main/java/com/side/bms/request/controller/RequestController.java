@@ -30,7 +30,7 @@ public class RequestController {
 
     }
 
-    public void selectRequest() {
+    public void selectRequest(Object details) {
         List<RequestDTO> request = requestService.selectRequest();
 
         if (request != null) {

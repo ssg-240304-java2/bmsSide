@@ -1,6 +1,15 @@
 package com.side.bms.request.model;
 
+import jdk.jfr.StackTrace;
+import lombok.*;
+
 import java.util.Date;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 
 public class RequestBookDTO {
 

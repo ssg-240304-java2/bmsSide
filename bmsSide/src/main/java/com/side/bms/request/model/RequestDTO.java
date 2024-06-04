@@ -15,6 +15,6 @@ public class RequestDTO {
     private int OrderId;
     private int UserId;
     private Date OrderDate;
-    private String status;
+    private String Status;
 
 }

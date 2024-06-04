@@ -1,10 +1,17 @@
 package com.side.bms.request.view;
 
 import com.side.bms.request.controller.RequestController;
+import com.side.bms.request.model.RequestDTO;
 
+import java.util.Date;
 import java.util.Scanner;
 
 public class RequestView {
+
+    private static int orderID;
+    private static int userId;
+    private static Date orderDate;
+    private static String status;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -26,11 +33,23 @@ public class RequestView {
                     requestController.selectRequestBook();
                     break;
                 case 2:
-                    requestController.selectRequest();
+                    requestController.selectRequest(details());
                     break;
             }
 
 
         }while (true);
     }
+
+    private static Object details() {
+
+        RequestDTO parameter = new RequestDTO();
+        parameter.setOrderId(orderID);
+        parameter.setUserId(userId);
+        parameter.setOrderDate(orderDate);
+        parameter.setStatus(status);
+
+        return parameter;
+    }
+
 }
