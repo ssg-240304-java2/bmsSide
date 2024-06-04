@@ -9,16 +9,11 @@ import java.util.List;
 
 import static com.side.bms.common.MyBatisTemplate.getSqlSession;
 
+
 public class RequestService {
 
+
     public List<RequestBookDTO> selectRequestBook() {            // 주문도서선택
-
-//        SqlSession sqlSession = getSqlSession();
-//        RequestMapper = sqlSession.getMapper(RequestMapper.class);
-//        List<RequestBookDTO> requestBook = RequestMapper.selectRequestBook();
-//        sqlSession.close();
-//        return requestBook;
-
 
         SqlSession sqlSession = getSqlSession();
         try {
@@ -26,13 +21,21 @@ public class RequestService {
             List<RequestBookDTO> requestBook = requestMapper.selectRequestBook();
             return requestBook;
         } finally {
-//            sqlSession.close();
+            sqlSession.close();
         }
     }
 
 
-    public List<RequestDTO> selectRequest() {
+    public List<RequestDTO> selectRequest() { // 주문 내역 출력
 
-        return null;
+        SqlSession sqlSession = getSqlSession();
+        try {
+            RequestMapper requestMapper = sqlSession.getMapper(RequestMapper.class);
+            List<RequestDTO> request = requestMapper.selectRequest();
+            return request;
+        } finally {
+            sqlSession.close();
+        }
     }
 }
+
