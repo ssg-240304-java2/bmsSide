@@ -12,10 +12,11 @@ repositories {
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+
     testImplementation 'org.assertj:assertj-core:3.25.3'
 
-    implementation 'com.mysql:mysql-connector-j:8.0.33'
-    implementation 'org.mybatis:mybatis:3.5.6'
+    implementation 'mysql:mysql-connector-java:8.0.28'
+    implementation 'org.mybatis:mybatis:3.5.16'
 
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
