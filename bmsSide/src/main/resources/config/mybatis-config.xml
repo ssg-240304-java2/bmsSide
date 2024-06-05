@@ -25,7 +25,5 @@
     <mappers>
         <mapper resource="com/side/bms/order/model/mapper/OrderMapper.xml"/>
 
-
-<!--        <package name="com.side.bms.*"/> &lt;!&ndash; 패키지명을 설정하면 해당 패키지 내의 모든 매퍼를 읽어들임 &ndash;&gt;-->
     </mappers>
 </configuration>
