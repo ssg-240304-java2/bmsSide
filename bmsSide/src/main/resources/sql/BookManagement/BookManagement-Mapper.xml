@@ -4,18 +4,100 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.side.bms.BookManagement.model.DAO.BookManagementMapper">
 
+<insert id="registerBook" useGeneratedKeys="true" keyProperty="book_id">
 
-    <insert id="registerBook" useGeneratedKeys="true" keyProperty="book_id">
+    INSERT INTO
+    tbl_book
+    VALUES(
+    NULL, #{ title }, #{ author }, #{ description } ,#{ price }, #{ category },NOW()
+    )
 
-        INSERT INTO
+</insert>
+
+<select id="ViewAllProduct" resultType="com.side.bms.BookManagement.model.DTO.UpdateDTO">
+    SELECT
+        book_id,
+        title,
+        author,
+        description,
+        price,
+        category,
+        created_at
+    FROM
         tbl_book
-        VALUES(
-        NULL, #{ title }, #{ author }, #{ description } ,#{ price }, #{ category },NOW()
-        )
+    ORDER BY
+        book_id
+</select>
 
-    </insert>
+    <update id="updateBook">
 
+        UPDATE
+            tbl_book
+        <set>
+            <if test="title !=null">
+                TITLE = #{ title },
+            </if>
+            <if test="author !=null">
+                AUTHOR = #{ author },
+            </if>
+            <if test="description != null">
+                DESCRIPTION = #{ description },
+            </if>
+            <if test="price !=null">
+                PRICE = #{ price },
+            </if>
+            <if test="category != null">
+                CATEGORY = #{ category },
+            </if>
+        </set>
+            WHERE book_id = #{ book_id }
+    </update>
 
+    <select id="searchProductByCategory" resultType="com.side.bms.BookManagement.model.DTO.ProductSearchDTO">
+        SELECT
+            book_id,
+            title,
+            author,
+            description,
+            price,
+            category,
+            created_at
+        FROM
+            tbl_book
+        WHERE
+        category = #{ category }
+    </select>
 
+<select id="searchProductByPrice" resultType="com.side.bms.BookManagement.model.DTO.ProductSearchDTO">
+
+    SELECT
+        book_id,
+        title,
+        author,
+        description,
+        price,
+        category,
+        created_at
+    FROM
+        tbl_book
+    WHERE
+        price = #{ price }
+
+</select>
+
+<select id="searchProductByAuthor" resultType="com.side.bms.BookManagement.model.DTO.ProductSearchDTO">
+    SELECT
+        book_id,
+        title,
+        author,
+        description,
+        price,
+        category,
+        created_at
+    FROM
+        tbl_book
+    WHERE
+        author = #{ author }
+</select>
 
 </mapper>
