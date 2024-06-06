@@ -1,14 +1,13 @@
 package com.side.bms.BookManagement.view;
-
 import com.side.bms.BookManagement.controller.BookManagementController;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class BookManagementView {
     Scanner sc =new Scanner(System.in);
-    BookManagementController bookManagementController =new BookManagementController();
+    BookManagementController bookManagementController = new BookManagementController();
+
+    searchBookView searchBookView = new searchBookView();
+    UpdateBookView updateBookView = new UpdateBookView();
 
     public void bookManagement(){
 
@@ -20,17 +19,16 @@ public class BookManagementView {
             System.out.println("3. 도서 조회");
             int no =sc.nextInt();
 
-
-
             switch(no) {
                 case 1 : bookManagementController.registerBook(inputBook()); break;
-//                case 2 : bookManagementController.updateBook(); break;
-//                case 3 : bookManagementController.selectBook(); break;
+                case 2 : updateBookView.updateBook(); ; break;
+                case 3 : searchBookView.SearchBookView();  break;
             }
-
         }while(true);
-
     }
+
+
+
 
     private static Map<String , String> inputBook() {
 
@@ -56,7 +54,5 @@ public class BookManagementView {
 
         return book;
     }
-
-
 
 }
