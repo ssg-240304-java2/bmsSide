@@ -4,6 +4,7 @@ import com.side.bms.BookManagement.model.DTO.BookRegister;
 import com.side.bms.BookManagement.model.DTO.ProductSearchDTO;
 import com.side.bms.BookManagement.model.DTO.UpdateDTO;
 
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Map;
 
@@ -62,4 +63,21 @@ public class ResultView {
             System.out.print(s);
         }
     }
+
+    public static void ModifyBook(UpdateDTO update) {
+
+        if( update == null){
+            System.out.print(">>>등록되지 않았습니다.<<<");
+        }
+        else{
+            System.out.println("====================");
+            System.out.println("book_id :" + update.getBook_id());
+            System.out.println("title : " + update.getTitle() );
+            System.out.println("author : " + update.getAuthor());
+            System.out.println("description : " + update.getDescription());
+            System.out.println("price : " + update.getPrice());
+            System.out.println("category : " + update.getCategory());
+        }
+    }
+
 }

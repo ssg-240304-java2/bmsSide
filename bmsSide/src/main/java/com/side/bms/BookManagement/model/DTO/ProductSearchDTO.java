@@ -17,4 +17,6 @@ public class ProductSearchDTO {
     private int price;
     private String category;
     private String created_at;
+
 }
+

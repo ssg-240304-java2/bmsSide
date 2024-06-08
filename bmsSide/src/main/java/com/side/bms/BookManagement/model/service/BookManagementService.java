@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
-import static com.side.bms.common.MyBatisTemplate.getSqlSession;
+import static com.side.bms.BookManagement.common.MyBatisTemplate.getSqlSession;
 
 public class BookManagementService {
 
@@ -16,17 +16,17 @@ public class BookManagementService {
 
         SqlSession sqlSession = getSqlSession();
 
-        BookManagementMapper bookManagementMapper = sqlSession.getMapper( BookManagementMapper.class);
+        BookManagementMapper bookManagementMapper = sqlSession.getMapper(BookManagementMapper.class);
         int result = bookManagementMapper.registerBook(bookRegister);
 
-        if(result > 0){
+        if (result > 0) {
             sqlSession.commit();
-        }else{
+        } else {
             sqlSession.rollback();
         }
 
         sqlSession.close();
-        return result > 0 ? true: false ;
+        return result > 0 ? true : false;
 
     }
 
@@ -34,35 +34,19 @@ public class BookManagementService {
     public List<UpdateDTO> ViewAllProduct() {
 
         SqlSession sqlSession = getSqlSession();
-        BookManagementMapper bookManagementMapper = sqlSession.getMapper( BookManagementMapper.class);
-        List<UpdateDTO> updateList =  bookManagementMapper.ViewAllProduct();
+        BookManagementMapper bookManagementMapper = sqlSession.getMapper(BookManagementMapper.class);
+        List<UpdateDTO> updateList = bookManagementMapper.ViewAllProduct();
 
         sqlSession.close();
         return updateList;
 
     }
 
-    public boolean updateBook(UpdateDTO updateDTO) {
-
-        SqlSession sqlSession = getSqlSession();
-        BookManagementMapper bookManagementMapper = sqlSession.getMapper( BookManagementMapper.class);
-        int result =  bookManagementMapper.updateBook(updateDTO);
-
-        if(result > 0) {
-            sqlSession.commit();
-        } else {
-            sqlSession.rollback();
-        }
-
-        sqlSession.close();
-        return result > 0 ? true: false ;
-
-
-    }
 
     public List<ProductSearchDTO> searchProductByCategory(String category) {
+
         SqlSession sqlSession = getSqlSession();
-        BookManagementMapper bookManagementMapper = sqlSession.getMapper( BookManagementMapper.class);
+        BookManagementMapper bookManagementMapper = sqlSession.getMapper(BookManagementMapper.class);
         List<ProductSearchDTO> productList = bookManagementMapper.searchProductByCategory(category);
         sqlSession.close();
         return productList;
@@ -71,17 +55,35 @@ public class BookManagementService {
 
     public List<ProductSearchDTO> searchProductByPrice(String price) {
         SqlSession sqlSession = getSqlSession();
-        BookManagementMapper bookManagementMapper = sqlSession.getMapper( BookManagementMapper.class);
-        List<ProductSearchDTO> productlist =  bookManagementMapper.searchProductByPrice(price);
+        BookManagementMapper bookManagementMapper = sqlSession.getMapper(BookManagementMapper.class);
+        List<ProductSearchDTO> productlist = bookManagementMapper.searchProductByPrice(price);
         sqlSession.close();
         return productlist;
     }
 
     public List<ProductSearchDTO> searchProductByAuthor(String author) {
         SqlSession sqlSession = getSqlSession();
-        BookManagementMapper bookManagementMapper = sqlSession.getMapper( BookManagementMapper.class);
+        BookManagementMapper bookManagementMapper = sqlSession.getMapper(BookManagementMapper.class);
         List<ProductSearchDTO> authorList = bookManagementMapper.searchProductByAuthor(author);
         sqlSession.close();
         return authorList;
+    }
+
+
+    public boolean ModifyBook(UpdateDTO update) {
+
+        SqlSession sqlSession = getSqlSession();
+
+        BookManagementMapper bookManagementMapper = sqlSession.getMapper(BookManagementMapper.class);
+        int result = bookManagementMapper.ModifyBook(update);
+
+        if (result > 0) {
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+        sqlSession.close();
+        return result > 0 ? true : false;
+
     }
 }

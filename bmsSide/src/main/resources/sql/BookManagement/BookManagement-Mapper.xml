@@ -4,6 +4,28 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.side.bms.BookManagement.model.DAO.BookManagementMapper">
 
+    <resultMap id="productResultMap" type="com.side.bms.BookManagement.model.DTO.ProductSearchDTO">
+        <id property="book_id" column="book_id"/>
+        <result property="title" column="title"/>
+        <result property="author" column="author"/>
+        <result property="description" column="description"/>
+        <result property="price" column="price"/>
+        <result property="category" column="category"/>
+        <result property="created_at" column="created_at"/>
+    </resultMap>
+
+
+    <resultMap id="UpdateResultMap" type="com.side.bms.BookManagement.model.DTO.UpdateDTO">
+        <id property="book_id" column="book_id"/>
+        <result property="title" column="title"/>
+        <result property="author" column="author"/>
+        <result property="description" column="description"/>
+        <result property="price" column="price"/>
+        <result property="category" column="category"/>
+        <result property="created_at" column="created_at"/>
+    </resultMap>
+
+
 <insert id="registerBook" useGeneratedKeys="true" keyProperty="book_id">
 
     INSERT INTO
@@ -14,7 +36,7 @@
 
 </insert>
 
-<select id="ViewAllProduct" resultType="com.side.bms.BookManagement.model.DTO.UpdateDTO">
+<select id="ViewAllProduct" resultMap="UpdateResultMap">
     SELECT
         book_id,
         title,
@@ -29,31 +51,8 @@
         book_id
 </select>
 
-    <update id="updateBook">
 
-        UPDATE
-            tbl_book
-        <set>
-            <if test="title !=null">
-                TITLE = #{ title },
-            </if>
-            <if test="author !=null">
-                AUTHOR = #{ author },
-            </if>
-            <if test="description != null">
-                DESCRIPTION = #{ description },
-            </if>
-            <if test="price !=null">
-                PRICE = #{ price },
-            </if>
-            <if test="category != null">
-                CATEGORY = #{ category },
-            </if>
-        </set>
-            WHERE book_id = #{ book_id }
-    </update>
-
-    <select id="searchProductByCategory" resultType="com.side.bms.BookManagement.model.DTO.ProductSearchDTO">
+    <select id="searchProductByCategory" resultMap="productResultMap">
         SELECT
             book_id,
             title,
@@ -68,7 +67,7 @@
         category = #{ category }
     </select>
 
-<select id="searchProductByPrice" resultType="com.side.bms.BookManagement.model.DTO.ProductSearchDTO">
+<select id="searchProductByPrice" resultMap="productResultMap">
 
     SELECT
         book_id,
@@ -85,7 +84,7 @@
 
 </select>
 
-<select id="searchProductByAuthor" resultType="com.side.bms.BookManagement.model.DTO.ProductSearchDTO">
+<select id="searchProductByAuthor" resultMap="productResultMap">
     SELECT
         book_id,
         title,
@@ -99,5 +98,40 @@
     WHERE
         author = #{ author }
 </select>
+
+
+
+    <select id="selectBookNumber" resultType="com.side.bms.BookManagement.model.DTO.UpdateDTO">
+        SELECT
+            book_id
+        FROM
+            tbl_book
+        WHERE
+            book_id = #{ book_id }
+    </select>
+
+    <update id=" ModifyBook" parameterType="UpdateDTO">
+
+        UPDATE tbl_book
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="author != null">
+                author = #{author},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="category != null">
+                category = #{category},
+            </if>
+        </set>
+        WHERE book_id = #{book_id}
+    </update>
+
 
 </mapper>

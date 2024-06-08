@@ -6,13 +6,12 @@ import com.side.bms.BookManagement.model.DTO.UpdateDTO;
 import com.side.bms.BookManagement.model.service.BookManagementService;
 import com.side.bms.BookManagement.view.ResultView;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BookManagementController {
 
 
-    BookManagementService bookManagementService =new BookManagementService();
+    BookManagementService bookManagementService = new BookManagementService();
 
     public void registerBook(Map<String, String> book) {
 
@@ -29,7 +28,7 @@ public class BookManagementController {
         bookRegister.setPrice(price);
         bookRegister.setCategory(category);
 
-        if(bookManagementService.registerBook(bookRegister)){
+        if (bookManagementService.registerBook(bookRegister)) {
             ResultView.registerBook(bookRegister);
         }
 
@@ -40,31 +39,19 @@ public class BookManagementController {
     public void ViewAllProduct() {
         List<UpdateDTO> updateList = bookManagementService.ViewAllProduct();
 
-        if(updateList !=  null){
+        if (updateList != null && !updateList.isEmpty()) {
             ResultView.printBook(updateList);
         }
     }
 
 
-    public void updateBook(Map<String, String> book) {
-
-        int book_id = Integer.parseInt(book.get("book_id"));
-
-        UpdateDTO updateDTO = new UpdateDTO();
-        updateDTO.setBook_id(book_id);
-
-        if(bookManagementService.updateBook(updateDTO)){
-            ResultView.printSuccessMessage("update");
-        }
-    }
-
     public void searchProductByCategory(String category) {
 
-        List<ProductSearchDTO> list =  bookManagementService.searchProductByCategory(category);
+        List<ProductSearchDTO> list = bookManagementService.searchProductByCategory(category);
 
-        if(list != null && !list.isEmpty()){
+        if (list != null && !list.isEmpty()) {
             ResultView.searchByCategory(list);
-        }else{
+        } else {
             System.out.println("해당 카테고리는 없습니다. ");
         }
     }
@@ -74,9 +61,9 @@ public class BookManagementController {
 //        검색 결과는 ProductSearchDTO 객체의 리스트로 반환되며, 이 리스트는 list 변수에 저장됩니다.
         List<ProductSearchDTO> list = bookManagementService.searchProductByPrice(price);
 
-        if(list != null && !list.isEmpty()){
+        if (list != null && !list.isEmpty()) {
             ResultView.searchByPrice(list);
-        }else{
+        } else {
             System.out.println("해당 가격은 없습니다.");
         }
 
@@ -87,11 +74,35 @@ public class BookManagementController {
 
         List<ProductSearchDTO> list = bookManagementService.searchProductByAuthor(author);
 
-        if(list != null && !list.isEmpty()){
+        if (list != null && !list.isEmpty()) {
             ResultView.searchByAuthor(list);
-        }else{
+        } else {
             System.out.print("해당 저자는 없습니다.");
         }
 
     }
+
+
+    public void ModifyBook(Map<String, String> book) {
+
+        int book_id = Integer.parseInt(book.get("book_id"));
+        String title = book.get("title");
+        String author = book.get("author");
+        String description = book.get("description");
+        int price = Integer.parseInt(book.get("price"));
+        String category = book.get("category");
+
+        UpdateDTO update = new UpdateDTO();
+        update.setBook_id(book_id);
+        update.setTitle(title);
+        update.setAuthor(author);
+        update.setDescription(description);
+        update.setPrice(price);
+        update.setCategory(category);
+
+        if (bookManagementService.ModifyBook(update)) {
+            ResultView.ModifyBook(update);
+        }
+    }
 }
+

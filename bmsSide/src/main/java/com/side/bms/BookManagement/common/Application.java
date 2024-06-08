@@ -1,4 +1,4 @@
-package com.side.bms.common;
+package com.side.bms.BookManagement.common;
 
 import com.side.bms.BookManagement.view.BookManagementView;
 
@@ -8,7 +8,5 @@ public class Application {
         BookManagementView bookManagementView = new BookManagementView();
         bookManagementView.bookManagement();
 
-//        searchBookView searchBookView = new searchBookView();
-//        searchBookView.SearchBookView();
     }
 }
