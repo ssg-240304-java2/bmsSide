@@ -23,6 +23,5 @@
     </environments>
     <mappers>
         <mapper resource="sql/BookManagement/BookManagement-Mapper.xml"/>
-
     </mappers>
 </configuration>

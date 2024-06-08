@@ -4,7 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.side.bms.common.MyBatisTemplate.getSqlSession;
+import static com.side.bms.BookManagement.common.MyBatisTemplate.getSqlSession;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class MybatisTemplateTest {
