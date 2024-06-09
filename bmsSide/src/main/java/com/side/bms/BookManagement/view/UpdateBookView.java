@@ -1,71 +1,68 @@
 package com.side.bms.BookManagement.view;
 import com.side.bms.BookManagement.controller.BookManagementController;
+import com.side.bms.BookManagement.model.DTO.UpdateDTO;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class UpdateBookView {
-    Scanner sc =new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
     BookManagementController bookManagementController = new BookManagementController();
 
 
-    public void updateBook() {
+    public List<UpdateDTO> updateBook() {
 
-        do{
+        List<UpdateDTO> update = new ArrayList<>();
+        while (true) {
             String menu = """
-                ======================================
-                1. 전체 재고 조회
-                2. 수정 할 재고 입력
-                3. 이전 메뉴로
-                =======================================
-                입력 : """;
+                    ======================================
+                    수정 할 재고 입력 하시겠습니까 ?
+                    =======================================
+                    입력 : """;
+
             System.out.print(menu);
-            String update = sc.nextLine();
-            switch (update) {
-                case "1" : bookManagementController.ViewAllProduct(); break;
-                case "2" : bookManagementController.ModifyBook(ChooseBook()); break;
-                case "3" : return ;
+            String no = sc.nextLine();
+            int result = 0;
+
+            if (no.toUpperCase().equals("Y")) {
+
+                while(result == 0) {
+
+                    Map<String, String> para = ChooseBook();
+                    UpdateDTO modify = bookManagementController.ModifyBook(para);
+                    update.add(modify);
+
+                }
             }
-        }while(true);
+            return update;
+        }
     }
 
-        private  Map<String, String> ChooseBook(){
+    /***
+     *
+     * book_id 얻는 메서드
+     * @return
+     *
+     */
+
+    private Map<String, String> ChooseBook() {
 
         Scanner sc = new Scanner(System.in);
-
-        System.out.print("책 book_id를 입력해 주세요: ");
-        String book_id = sc.nextLine();
-
-        System.out.print("바꾸고 싶은 부분을 입력해 주세요 (title, author, description, price, category): ");
-        String fieldToChange = sc.nextLine();
-
         Map<String, String> book = new HashMap<>();
-        book.put("book_id", book_id);  // 항상 book_id를 맵에 추가
 
-            if("book_id".equals(book_id)) {
-                book.put("book_id", book_id);
-            }else if("title".equals(fieldToChange)){
-                System.out.print("바꾸고 싶은 title :");
-                String title = sc.nextLine();
-                book.put("title",title);
-            }else if("author".equals(fieldToChange)){
-                String author = sc.nextLine();
-                book.put("author",author);
-            }else if("description".equals(fieldToChange)){
-                String description = sc.nextLine();
-                book.put("description","description");
-            }else if("price".equals(fieldToChange)){
-                String price = sc.nextLine();
-                book.put("price",price);
-            }else if("category".equals(fieldToChange)){
-                String category = sc.nextLine();
-                book.put("category",category);
-            }else{
-                System.out.print("다시 입력해 주세요.");
+        do {
+            System.out.print("책 book_id를 입력해 주세요: ");
+            String book_id = sc.nextLine();
+            book.put("book_id", book_id);
+
+            if (bookManagementController.printProductBook(book_id) == 0) {
+                System.out.println("검색한 상품이 존재하지 않습니다. 다시 검색해주세요.");
+            } else {
+                break;
             }
-            return book;
-        }
+        } while (true);
 
+        return book;
+    }
 }
+
+

@@ -20,4 +20,10 @@ public interface BookManagementMapper {
     int ModifyBook(UpdateDTO update);
 
 
+    List<UpdateDTO> choosebookid(String bookId);
+
+
+    String getTitle(int bookId);
+
+    List<UpdateDTO> Modifytitle(String title);
 }
