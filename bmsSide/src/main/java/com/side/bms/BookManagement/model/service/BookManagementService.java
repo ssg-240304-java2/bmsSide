@@ -6,7 +6,9 @@ import com.side.bms.BookManagement.model.DTO.ProductSearchDTO;
 import com.side.bms.BookManagement.model.DTO.UpdateDTO;
 import org.apache.ibatis.session.SqlSession;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.side.bms.BookManagement.common.MyBatisTemplate.getSqlSession;
 
@@ -84,6 +86,44 @@ public class BookManagementService {
         }
         sqlSession.close();
         return result > 0 ? true : false;
+
+    }
+
+
+    public List<UpdateDTO> printProductBook(String bookId) {
+        SqlSession sqlSession = getSqlSession();
+        BookManagementMapper bookManagementMapper = sqlSession.getMapper(BookManagementMapper.class);
+
+        List<UpdateDTO> list = bookManagementMapper.choosebookid(bookId);
+        sqlSession.close();
+        return list;
+    }
+
+    public String getTitle(int book_id) {
+        SqlSession sqlSession = getSqlSession();
+        BookManagementMapper bookManagementMapper = sqlSession.getMapper(BookManagementMapper.class);
+
+
+        String title = bookManagementMapper.getTitle(book_id);
+
+        if (title != null) {
+            sqlSession.commit();
+        } else {
+            sqlSession.rollback();
+        }
+        return title;
+    }
+
+
+
+    public List<UpdateDTO> Modifytitle(String title) {
+        SqlSession sqlSession = getSqlSession();
+        BookManagementMapper bookManagementMapper = sqlSession.getMapper(BookManagementMapper.class);
+
+
+        List<UpdateDTO> updateList = bookManagementMapper.Modifytitle(title);
+        sqlSession.close();
+        return updateList;
 
     }
 }

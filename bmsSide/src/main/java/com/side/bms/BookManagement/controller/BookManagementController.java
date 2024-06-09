@@ -83,26 +83,50 @@ public class BookManagementController {
     }
 
 
-    public void ModifyBook(Map<String, String> book) {
 
-        int book_id = Integer.parseInt(book.get("book_id"));
-        String title = book.get("title");
-        String author = book.get("author");
-        String description = book.get("description");
-        int price = Integer.parseInt(book.get("price"));
-        String category = book.get("category");
+    public UpdateDTO ModifyBook(Map<String, String> para) {
 
-        UpdateDTO update = new UpdateDTO();
-        update.setBook_id(book_id);
-        update.setTitle(title);
-        update.setAuthor(author);
-        update.setDescription(description);
-        update.setPrice(price);
-        update.setCategory(category);
+        Scanner sc = new Scanner(System.in);
+        UpdateDTO updatedto = new UpdateDTO();
 
-        if (bookManagementService.ModifyBook(update)) {
-            ResultView.ModifyBook(update);
-        }
+        do {
+            System.out.print("바꾸고 싶은 분야를 입력 하세요 : ");
+            String department = sc.nextLine();
+
+            if (department.equals("title")) {
+                updatedto.setTitle(para.get("book_id"));
+                System.out.print("바꾸고 싶은 이름 : ");
+                String title = sc.nextLine();
+
+                List<UpdateDTO> updatetitle = bookManagementService.Modifytitle(title);
+
+            } else if (department.equals("author")) {
+                System.out.println("다시 잠시만");
+            } else {
+                System.out.print("없습니다.");
+            }
+        } while (true);
+
+
     }
+
+
+    public int printProductBook(String bookId) {
+
+        int result = 0;
+        List<UpdateDTO> updateList = new ArrayList<>();
+        updateList = bookManagementService.printProductBook(bookId);
+
+        if(updateList.size() > 0) {
+            result = 1;
+            ResultView.printInventoryList(updateList);
+        } else {
+            System.out.println("잘못된 검색어 입니다. 다시 선택해주세요.");
+        }
+
+        return result;
+    }
+
+
 }
 

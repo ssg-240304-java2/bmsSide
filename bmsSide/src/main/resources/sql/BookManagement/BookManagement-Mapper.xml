@@ -67,22 +67,37 @@
         category = #{ category }
     </select>
 
-<select id="searchProductByPrice" resultMap="productResultMap">
+    <select id="searchProductByPrice" parameterType="String" resultMap="productResultMap">
+        SELECT
+            book_id,
+            title,
+            author,
+            description,
+            price,
+            category,
+            created_at
+        FROM
+            tbl_book A
+        WHERE 1=1
+        <if test="price != null and price != '' and price &gt;= '0' and price &lt;= '10000'">
+            AND A.price &lt;CAST(#{price} AS DECIMAL)
+        </if>
+        <if test="price != null and price != '' and price &gt; '10000' and price &lt;= '20000'">
+            AND A.price &gt; 10000 AND A.price &lt;= CAST(#{price} AS DECIMAL)
+        </if>
+        <if test="price != null and price != '' and price &gt; '20000' and price &lt;= '30000'">
+            AND A.price &gt; 20000 AND A.price &lt;CAST(#{price} AS DECIMAL)
+        </if>
+        <if test="price != null and price != '' and price &gt; '30000' and price &lt;= '40000'">
+            AND A.price &gt; 20000 AND A.price &lt;CAST(#{price} AS DECIMAL)
+        </if>
+        ORDER BY book_id
+    </select>
 
-    SELECT
-        book_id,
-        title,
-        author,
-        description,
-        price,
-        category,
-        created_at
-    FROM
-        tbl_book
-    WHERE
-        price = #{ price }
 
-</select>
+
+
+
 
 <select id="searchProductByAuthor" resultMap="productResultMap">
     SELECT
@@ -110,27 +125,53 @@
             book_id = #{ book_id }
     </select>
 
-    <update id=" ModifyBook" parameterType="UpdateDTO">
+<!--    <update id=" ModifyBook" parameterType="UpdateDTO">-->
 
-        UPDATE tbl_book
-        <set>
-            <if test="title != null">
-                title = #{title},
-            </if>
-            <if test="author != null">
-                author = #{author},
-            </if>
-            <if test="description != null">
-                description = #{description},
-            </if>
-            <if test="price != null">
-                price = #{price},
-            </if>
-            <if test="category != null">
-                category = #{category},
-            </if>
-        </set>
-        WHERE book_id = #{book_id}
+<!--        UPDATE tbl_book-->
+<!--        <set>-->
+<!--            <if test="title != null">-->
+<!--                title = #{title},-->
+<!--            </if>-->
+<!--            <if test="author != null">-->
+<!--                author = #{author},-->
+<!--            </if>-->
+<!--            <if test="description != null">-->
+<!--                description = #{description},-->
+<!--            </if>-->
+<!--            <if test="price != null">-->
+<!--                price = #{price},-->
+<!--            </if>-->
+<!--            <if test="category != null">-->
+<!--                category = #{category},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        WHERE book_id = #{book_id}-->
+<!--    </update>-->
+
+    <select id="choosebookid"  resultMap="UpdateResultMap">
+        SELECT
+            book_id,
+            title,
+            author,
+            description,
+            price,
+            category,
+            created_at
+        FROM
+            tbl_book
+        WHERE
+            book_id = #{book_id}
+    </select>
+
+
+    <update id="Modifytitle" parameterType="String" >
+        UPDATE
+            tbl_book
+        SET
+            title = #{title}
+        WHERE
+            book_id = #{book_id}
+
     </update>
 
 

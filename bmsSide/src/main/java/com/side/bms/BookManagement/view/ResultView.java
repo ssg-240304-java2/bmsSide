@@ -5,6 +5,7 @@ import com.side.bms.BookManagement.model.DTO.ProductSearchDTO;
 import com.side.bms.BookManagement.model.DTO.UpdateDTO;
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -80,4 +81,11 @@ public class ResultView {
         }
     }
 
+    public static void printInventoryList(List<UpdateDTO> updateList) {
+
+        for(UpdateDTO dto : updateList){
+            System.out.println(dto);
+        }
+
+    }
 }
