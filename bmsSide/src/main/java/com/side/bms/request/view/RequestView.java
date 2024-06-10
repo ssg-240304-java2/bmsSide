@@ -21,10 +21,10 @@ public class RequestView {
 
         do {                // MainMenu
             System.out.println("=========== 주문 관리 시스템 ============");
-            System.out.println(" 1. 주문할 도서 선택 ");
+            System.out.println(" 1. 주문할 도서 확인 ");
             System.out.println(" 2. 주문 내역 확인 ");
-            System.out.println(" 3. ");
-            System.out.println(" 4. ");
+            System.out.println(" 3. 주문할 도서 선택 ");
+            System.out.println(" 4. 장바구니 확인");
             System.out.println("============ 메뉴를 선택하세요 ============");
             int no = sc.nextInt();
 
@@ -35,6 +35,8 @@ public class RequestView {
                 case 2:
                     requestController.selectRequest(details());
                     break;
+                case 3:
+                    requestController.checkRequest();
             }
 
 
