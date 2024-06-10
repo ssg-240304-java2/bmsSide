@@ -37,5 +37,18 @@ public class RequestService {
             sqlSession.close();
         }
     }
+
+
+//    public RequestBookDTO getBookById(int bookId) { // 주문할 도서 선택
+////
+////        SqlSession sqlSession = getSqlSession();
+////        try{
+////            RequestMapper requestMapper = sqlSession.getMapper(RequestMapper.class);
+////            List<RequestBookDTO> requestBook = requestMapper.selectRequestBook();
+////            return requestBook;
+////        } finally {
+////            sqlSession.close();
+////        }
+////    }
 }
 
