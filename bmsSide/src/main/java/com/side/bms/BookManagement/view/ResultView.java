@@ -88,4 +88,26 @@ public class ResultView {
         }
 
     }
+
+    public static void modifyBook(List<UpdateDTO> updateList) {
+
+        for(UpdateDTO dto : updateList){
+            System.out.println(dto);
+        }
+    }
+
+    public static void printUpdateALL(List<UpdateDTO> updateList) {
+
+        for(UpdateDTO s : updateList){
+            System.out.println(s);
+        }
+    }
+
+    public static void printchoosebook(List<UpdateDTO> updateList) {
+
+        for(UpdateDTO s : updateList){
+            System.out.println(s);
+        }
+    }
+
 }
