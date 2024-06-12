@@ -1,6 +1,5 @@
 package com.side.bms.BookManagement.view;
 import com.side.bms.BookManagement.controller.BookManagementController;
-import com.side.bms.BookManagement.model.DTO.UpdateDTO;
 
 import java.util.*;
 
@@ -8,60 +7,67 @@ public class UpdateBookView {
     Scanner sc = new Scanner(System.in);
     BookManagementController bookManagementController = new BookManagementController();
 
+    public void updateBook() {
 
-    public List<UpdateDTO> updateBook() {
-
-        List<UpdateDTO> update = new ArrayList<>();
         while (true) {
             String menu = """
                     ======================================
-                    수정 할 재고 입력 하시겠습니까 ?
+                    수정 할 재고 입력 하시겠습니까(Y/N) ?
                     =======================================
                     입력 : """;
 
             System.out.print(menu);
             String no = sc.nextLine();
-            int result = 0;
-
             if (no.toUpperCase().equals("Y")) {
-
-                while(result == 0) {
-
-                    Map<String, String> para = ChooseBook();
-                    UpdateDTO modify = bookManagementController.ModifyBook(para);
-                    update.add(modify);
-
-                }
+                bookManagementController.ChangeBook(ChooseBook());
+                break;
+            } else {
+                System.out.print("재고 입력을 하지 않겠습니다.");
+                break;
             }
-            return update;
         }
     }
 
-    /***
+    /**
+     * book_id가져오기
      *
-     * book_id 얻는 메서드
-     * @return
-     *
+     * @return 근데 굳이 SELECT을 해야하나????????? 그냥 바로 넣으면 안되나????
      */
-
     private Map<String, String> ChooseBook() {
-
         Scanner sc = new Scanner(System.in);
-        Map<String, String> book = new HashMap<>();
-
-        do {
-            System.out.print("책 book_id를 입력해 주세요: ");
+        while (true) {
+            System.out.print("""
+                    ============================
+                    등록 물품을 수정하겠습니다.
+                    책 번호를 입력하세요 :
+                    ============================
+                    """);
             String book_id = sc.nextLine();
+            Map<String, String> book = new HashMap<>();
             book.put("book_id", book_id);
 
-            if (bookManagementController.printProductBook(book_id) == 0) {
-                System.out.println("검색한 상품이 존재하지 않습니다. 다시 검색해주세요.");
-            } else {
-                break;
-            }
-        } while (true);
+            System.out.print("바꾸고 싶은 분야를 입력해 주세요: title/author/description : ");
+            String depart = sc.nextLine();
 
-        return book;
+            if (depart.equals("title")) {
+                System.out.print("수정할 title: ");
+                String title = sc.nextLine();
+                book.put("title", title);
+            } else if (depart.equals("author")) {
+                System.out.print("수정할 author: ");
+                String author = sc.nextLine();
+                book.put("author", author);
+            } else if (depart.equals("description")) {
+                System.out.print("수정할 description: ");
+                String description = sc.nextLine();
+                book.put("description", description);
+            } else {
+                System.out.println("잘못된 입력입니다. 다시 시도하세요.");
+                continue;
+            }
+
+            return book;
+        }
     }
 }
 

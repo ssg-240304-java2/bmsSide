@@ -6,7 +6,6 @@ import com.side.bms.BookManagement.model.DTO.ProductSearchDTO;
 import com.side.bms.BookManagement.model.DTO.UpdateDTO;
 import org.apache.ibatis.session.SqlSession;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -114,16 +113,26 @@ public class BookManagementService {
         return title;
     }
 
-
-
-    public List<UpdateDTO> Modifytitle(String title) {
+    public boolean ChangeBook(UpdateDTO updateDTO) {
         SqlSession sqlSession = getSqlSession();
         BookManagementMapper bookManagementMapper = sqlSession.getMapper(BookManagementMapper.class);
 
+        int changeResult = bookManagementMapper.ChangeBook(updateDTO);
 
-        List<UpdateDTO> updateList = bookManagementMapper.Modifytitle(title);
+
+        if (changeResult> 0) {
+            sqlSession.commit();
+            System.out.println("성공");
+        } else {
+            sqlSession.rollback();
+            System.out.println("실패");
+        }
         sqlSession.close();
-        return updateList;
+        return changeResult > 0 ? true: false ;
 
     }
 }
+
+
+
+

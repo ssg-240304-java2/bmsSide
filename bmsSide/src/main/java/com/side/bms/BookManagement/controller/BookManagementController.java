@@ -83,41 +83,13 @@ public class BookManagementController {
     }
 
 
-
-    public UpdateDTO ModifyBook(Map<String, String> para) {
-
-        Scanner sc = new Scanner(System.in);
-        UpdateDTO updatedto = new UpdateDTO();
-
-        do {
-            System.out.print("바꾸고 싶은 분야를 입력 하세요 : ");
-            String department = sc.nextLine();
-
-            if (department.equals("title")) {
-                updatedto.setTitle(para.get("book_id"));
-                System.out.print("바꾸고 싶은 이름 : ");
-                String title = sc.nextLine();
-
-                List<UpdateDTO> updatetitle = bookManagementService.Modifytitle(title);
-
-            } else if (department.equals("author")) {
-                System.out.println("다시 잠시만");
-            } else {
-                System.out.print("없습니다.");
-            }
-        } while (true);
-
-
-    }
-
-
     public int printProductBook(String bookId) {
 
         int result = 0;
         List<UpdateDTO> updateList = new ArrayList<>();
         updateList = bookManagementService.printProductBook(bookId);
 
-        if(updateList.size() > 0) {
+        if (updateList.size() > 0) {
             result = 1;
             ResultView.printInventoryList(updateList);
         } else {
@@ -128,5 +100,66 @@ public class BookManagementController {
     }
 
 
+//    public void ChangeBook(Map<String, String> book) {
+//
+//        UpdateDTO updateDTO = new UpdateDTO();
+//        int book_id = Integer.parseInt(book.get("book_id"));
+//        String title = book.get("title");
+//        String author = book.get("author");
+//        String description = book.get("description");
+//
+//
+//        if(book_id > 0 ){
+//
+//            updateDTO.setBook_id(book_id);
+//            updateDTO.setAuthor(author);
+//            updateDTO.setTitle(title);
+//            updateDTO.setDescription(description);
+//
+//            boolean isModified = bookManagementService.ChangeBook(updateDTO);
+//
+//            if(isModified) {
+//                System.out.println("성공");
+//            }else{
+//                System.out.println("실패");
+//            }
+//        }
+//    }
+//}
+
+    public void ChangeBook(Map<String, String> book) {
+        UpdateDTO updateDTO = new UpdateDTO();
+        String bookIdStr = book.get("book_id");
+        String title = book.get("title");
+        String author = book.get("author");
+        String description = book.get("description");
+
+        try {
+            int book_id = Integer.parseInt(bookIdStr);
+
+            if (book_id > 0) {
+                updateDTO.setBook_id(book_id);
+                updateDTO.setAuthor(author);
+                updateDTO.setTitle(title);
+                updateDTO.setDescription(description);
+
+                boolean isModified = bookManagementService.ChangeBook(updateDTO);
+
+                if (isModified) {
+                    System.out.println("성공");
+                } else {
+                    System.out.println("실패");
+                }
+            }
+        } catch (NumberFormatException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
+
+
+
+
+
+
 

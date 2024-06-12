@@ -125,30 +125,27 @@
             book_id = #{ book_id }
     </select>
 
-<!--    <update id=" ModifyBook" parameterType="UpdateDTO">-->
 
-<!--        UPDATE tbl_book-->
-<!--        <set>-->
-<!--            <if test="title != null">-->
-<!--                title = #{title},-->
-<!--            </if>-->
-<!--            <if test="author != null">-->
-<!--                author = #{author},-->
-<!--            </if>-->
-<!--            <if test="description != null">-->
-<!--                description = #{description},-->
-<!--            </if>-->
-<!--            <if test="price != null">-->
-<!--                price = #{price},-->
-<!--            </if>-->
-<!--            <if test="category != null">-->
-<!--                category = #{category},-->
-<!--            </if>-->
-<!--        </set>-->
-<!--        WHERE book_id = #{book_id}-->
-<!--    </update>-->
+    <update id="ChangeBook" parameterType="com.side.bms.BookManagement.model.DTO.UpdateDTO">
+        UPDATE
+            tbl_book
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="author != null">
+                author = #{author},
+            </if>
+            <if test="description != null">
+                description = #{description}
+            </if>
+        </set>
+            WHERE book_id = #{book_id}
+    </update>
 
-    <select id="choosebookid"  resultMap="UpdateResultMap">
+
+
+    <select id="ChooseBook"  resultMap="UpdateResultMap">
         SELECT
             book_id,
             title,
@@ -163,16 +160,6 @@
             book_id = #{book_id}
     </select>
 
-
-    <update id="Modifytitle" parameterType="String" >
-        UPDATE
-            tbl_book
-        SET
-            title = #{title}
-        WHERE
-            book_id = #{book_id}
-
-    </update>
 
 
 </mapper>
