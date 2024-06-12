@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.side.bms.order.model.mapper.OrderMapper">
+    <select id="selectAllOrder"  resultType="com.side.bms.order.model.dto.OrderDTO">
+        SELECT order_id   as orderId,
+               user_id    as userId,
+               order_date as orderDate,
+               status
+          FROM tbl_order
+    </select>
+
+    <select id="findByOrderId" resultType="com.side.bms.order.model.dto.OrderDTO">
+        SELECT order_id   as orderId,
+               user_id    as userId,
+               order_date as orderDate,
+               status     as status
+          FROM tbl_order
+         where order_id = #{orderId}
+    </select>
+</mapper>

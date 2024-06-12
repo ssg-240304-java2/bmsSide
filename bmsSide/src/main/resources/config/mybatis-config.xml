@@ -22,7 +22,8 @@
         </environment>
     </environments>
 
+    <mappers>
+        <mapper resource="com/side/bms/order/model/mapper/OrderMapper.xml"/>
 
-
-
+    </mappers>
 </configuration>
