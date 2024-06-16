@@ -36,13 +36,6 @@ public class BookManagementController {
     }
 
 
-    public void ViewAllProduct() {
-        List<UpdateDTO> updateList = bookManagementService.ViewAllProduct();
-
-        if (updateList != null && !updateList.isEmpty()) {
-            ResultView.printBook(updateList);
-        }
-    }
 
 
     public void searchProductByCategory(String category) {
@@ -83,49 +76,7 @@ public class BookManagementController {
     }
 
 
-    public int printProductBook(String bookId) {
 
-        int result = 0;
-        List<UpdateDTO> updateList = new ArrayList<>();
-        updateList = bookManagementService.printProductBook(bookId);
-
-        if (updateList.size() > 0) {
-            result = 1;
-            ResultView.printInventoryList(updateList);
-        } else {
-            System.out.println("잘못된 검색어 입니다. 다시 선택해주세요.");
-        }
-
-        return result;
-    }
-
-
-//    public void ChangeBook(Map<String, String> book) {
-//
-//        UpdateDTO updateDTO = new UpdateDTO();
-//        int book_id = Integer.parseInt(book.get("book_id"));
-//        String title = book.get("title");
-//        String author = book.get("author");
-//        String description = book.get("description");
-//
-//
-//        if(book_id > 0 ){
-//
-//            updateDTO.setBook_id(book_id);
-//            updateDTO.setAuthor(author);
-//            updateDTO.setTitle(title);
-//            updateDTO.setDescription(description);
-//
-//            boolean isModified = bookManagementService.ChangeBook(updateDTO);
-//
-//            if(isModified) {
-//                System.out.println("성공");
-//            }else{
-//                System.out.println("실패");
-//            }
-//        }
-//    }
-//}
 
     public void ChangeBook(Map<String, String> book) {
         UpdateDTO updateDTO = new UpdateDTO();
@@ -133,15 +84,20 @@ public class BookManagementController {
         String title = book.get("title");
         String author = book.get("author");
         String description = book.get("description");
+        String price = book.get("price");
+        String category = book.get("category");
 
         try {
             int book_id = Integer.parseInt(bookIdStr);
+            int money = Integer.parseInt(price);
 
             if (book_id > 0) {
                 updateDTO.setBook_id(book_id);
                 updateDTO.setAuthor(author);
                 updateDTO.setTitle(title);
                 updateDTO.setDescription(description);
+                updateDTO.setPrice(money);
+                updateDTO.setCategory(category);
 
                 boolean isModified = bookManagementService.ChangeBook(updateDTO);
 
