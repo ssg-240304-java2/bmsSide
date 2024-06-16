@@ -46,22 +46,30 @@ public class UpdateBookView {
             Map<String, String> book = new HashMap<>();
             book.put("book_id", book_id);
 
-            System.out.print("바꾸고 싶은 분야를 입력해 주세요: title/author/description : ");
+            System.out.print("바꾸고 싶은 분야를 입력해 주세요: title/author/description/price/category: ");
             String depart = sc.nextLine();
 
             if (depart.equals("title")) {
-                System.out.print("수정할 title: ");
+                System.out.print("수정 할 title: ");
                 String title = sc.nextLine();
                 book.put("title", title);
             } else if (depart.equals("author")) {
-                System.out.print("수정할 author: ");
+                System.out.print("수정 할 author: ");
                 String author = sc.nextLine();
                 book.put("author", author);
             } else if (depart.equals("description")) {
-                System.out.print("수정할 description: ");
+                System.out.print("수정 할 description: ");
                 String description = sc.nextLine();
                 book.put("description", description);
-            } else {
+            } else if(depart.equals("price")){
+                System.out.print("수정 할 price : ");
+                String price = sc.nextLine();
+                book.put("price",price);
+            }else if(depart.equals("category")){
+                System.out.print("수정 할 category :");
+                String category = sc.nextLine();
+                book.put("category",category);
+            }else {
                 System.out.println("잘못된 입력입니다. 다시 시도하세요.");
                 continue;
             }

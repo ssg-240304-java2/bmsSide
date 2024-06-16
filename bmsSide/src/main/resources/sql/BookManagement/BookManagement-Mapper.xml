@@ -139,6 +139,12 @@
             <if test="description != null">
                 description = #{description}
             </if>
+            <if test="price != null">
+                price = #{price}
+            </if>
+            <if test="category != null">
+                category = #{category}
+            </if>
         </set>
             WHERE book_id = #{book_id}
     </update>
